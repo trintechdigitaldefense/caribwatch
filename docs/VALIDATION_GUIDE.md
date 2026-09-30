@@ -40,7 +40,7 @@ Before using CaribWatch on any client network, validate that it behaves correctl
 
 ### F. Authorization Logging
 1. Run scans with and without `--force`.
-2. Confirm `auth_log` table (or status output) records the authorization reference.
+2. Confirm authorization reference is recorded.
 
 ### G. Client Report Format
 ```bash
@@ -52,11 +52,11 @@ Review the generated Markdown for clarity suitable for non-technical stakeholder
 
 ## 2. Realistic Traffic Validation
 
-Because real client traffic cannot be safely simulated here, perform these steps on a staging network that mirrors the client environment as closely as possible:
+Perform these steps on a staging network that mirrors the client environment as closely as possible:
 
 - Same operating system and privilege level
 - Similar outbound internet patterns
-- Presence of common business applications (email, browsers, cloud services)
+- Presence of common business applications
 - Presence of any residential / mobile devices if applicable
 
 Run CaribWatch in `monitor` mode for at least 24–48 hours. Review:
@@ -66,7 +66,7 @@ Run CaribWatch in `monitor` mode for at least 24–48 hours. Review:
 - Whether high-severity items are actionable
 - Resource usage (CPU / memory)
 
-Document any tuning required (threshold changes, indicator exclusions, cooldown adjustments).
+Document any tuning required (see `FALSE_POSITIVE_TUNING.md`).
 
 ---
 
@@ -75,19 +75,13 @@ Document any tuning required (threshold changes, indicator exclusions, cooldown 
 Before client deployment:
 
 - [ ] Placeholder / example indicators replaced with current, verified sources
-- [ ] Each indicator has a severity, description, and (ideally) a reference
-- [ ] No overly broad ranges that will flood alerts on normal traffic
-- [ ] Process exists to refresh indicators at least weekly (or more frequently)
-
-Recommended sources for Caribbean-relevant intelligence:
-- TT-CSIRT advisories (https://ttcsirt.gov.tt)
-- Reputable commercial threat feeds
-- Open-source CTI projects with regional coverage
-- Your own incident observations and client-shared IOCs (under NDA)
+- [ ] Each indicator has severity, description, and reference
+- [ ] No overly broad ranges that will flood alerts
+- [ ] Process exists to refresh indicators (see `LIVE_INTEL_PROCESS.md`)
 
 ---
 
-## 4. Sign-off
+## 4. Final Sign-off
 
 Validation performed by: _______________  
 Date: _______________  

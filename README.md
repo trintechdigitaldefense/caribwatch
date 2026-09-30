@@ -1,4 +1,4 @@
-# CaribWatch v0.2.1
+# CaribWatch v0.2.2
 
 **Caribbean-Specific Threat Visibility Tool**  
 Built by [TrinTech Digital Defense](https://trintechdigitaldefense.github.io/)
@@ -7,17 +7,22 @@ CaribWatch provides continuous, lightweight threat visibility for Trinidad & Tob
 
 ## Current Status
 
-**v0.2.1** — Hardened tool with:
-- Publicly documented example indicators (TT-CSIRT, published malware reports)
-- CIDR matching, alert cooldown, privilege checks
-- Client-facing report mode
-- Formal Rules of Engagement template
-- Validation guide
+**v0.2.2** is operationally complete for careful pilot use. All previously identified remaining items are now documented:
 
-**Still required before broad production client use:**
-1. Replace example indicators with your maintained, current feed
-2. Complete lab + realistic traffic validation (see `docs/VALIDATION_GUIDE.md`)
-3. Sign a Rules of Engagement with each client (template in `docs/RULES_OF_ENGAGEMENT.md`)
+| Item | Document |
+|------|----------|
+| Live indicator maintenance process | [docs/LIVE_INTEL_PROCESS.md](docs/LIVE_INTEL_PROCESS.md) |
+| Validation (lab + realistic traffic) | [docs/VALIDATION_GUIDE.md](docs/VALIDATION_GUIDE.md) |
+| Rules of Engagement template | [docs/RULES_OF_ENGAGEMENT.md](docs/RULES_OF_ENGAGEMENT.md) |
+| False-positive tuning | [docs/FALSE_POSITIVE_TUNING.md](docs/FALSE_POSITIVE_TUNING.md) |
+| Client communication playbook | [docs/CLIENT_COMMUNICATION_PLAYBOOK.md](docs/CLIENT_COMMUNICATION_PLAYBOOK.md) |
+| Backup & recovery | [docs/BACKUP_AND_RECOVERY.md](docs/BACKUP_AND_RECOVERY.md) |
+| Update mechanism | [docs/UPDATE_MECHANISM.md](docs/UPDATE_MECHANISM.md) |
+
+**Before any paying client production deployment you must still:**
+1. Maintain a real, current indicator feed (process defined)
+2. Complete validation on staging/realistic traffic
+3. Sign an ROE with the client
 
 ## Installation
 
@@ -39,10 +44,15 @@ caribwatch report --daily --client
 caribwatch status
 ```
 
-## Documentation
+## Documentation Index
 
-- [Rules of Engagement Template](docs/RULES_OF_ENGAGEMENT.md)
+- [Rules of Engagement](docs/RULES_OF_ENGAGEMENT.md)
 - [Validation Guide](docs/VALIDATION_GUIDE.md)
+- [Live Intel Process](docs/LIVE_INTEL_PROCESS.md)
+- [False Positive Tuning](docs/FALSE_POSITIVE_TUNING.md)
+- [Client Communication Playbook](docs/CLIENT_COMMUNICATION_PLAYBOOK.md)
+- [Backup & Recovery](docs/BACKUP_AND_RECOVERY.md)
+- [Update Mechanism](docs/UPDATE_MECHANISM.md)
 
 ## Authorized Use Only
 
