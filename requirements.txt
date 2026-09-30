@@ -1,3 +1,4 @@
 psutil>=5.9.0
 requests>=2.28.0
 rich>=13.0.0
+ipaddress>=1.0.23; python_version < "3.3"

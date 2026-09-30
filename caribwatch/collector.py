@@ -7,78 +7,88 @@ except ImportError:
     psutil = None
 
 
-def collect_network_observations() -> List[Dict[str, str]]:
+def collect_network_observations(max_observations: int = 5000) -> List[Dict[str, str]]:
     """
-    Collect basic network observations from the local system.
-    Returns a list of {type, value} dicts that can be matched against intel.
+    Collect network observations with basic privilege and resource protection.
+    Returns list of {type, value} dicts.
     """
-    observations = []
+    observations: List[Dict[str, str]] = []
 
     if psutil is None:
         return observations
+
+    seen = set()
+
+    def add(obs_type: str, value: str):
+        if len(observations) >= max_observations:
+            return
+        key = (obs_type, value)
+        if key not in seen and value:
+            seen.add(key)
+            observations.append({"type": obs_type, "value": value})
 
     # Active connections
     try:
         for conn in psutil.net_connections(kind="inet"):
             if conn.raddr:
-                remote_ip = conn.raddr.ip
-                observations.append({"type": "ip", "value": remote_ip})
+                remote_ip = str(conn.raddr.ip)
+                add("ip", remote_ip)
 
-                # Attempt reverse DNS (best effort, non-blocking style)
+                # Best-effort reverse DNS (skip if it would slow things down too much)
                 try:
                     hostname = socket.gethostbyaddr(remote_ip)[0]
-                    if hostname:
-                        observations.append({"type": "domain", "value": hostname})
-                except (socket.herror, socket.gaierror, OSError):
+                    if hostname and "." in hostname:
+                        add("domain", hostname.lower())
+                except (socket.herror, socket.gaierror, OSError, socket.timeout):
                     pass
     except (psutil.AccessDenied, PermissionError):
-        # Running without sufficient privileges
+        pass
+    except Exception:
         pass
 
-    # Listening addresses (less useful for threat intel but included)
-    try:
-        for conn in psutil.net_connections(kind="inet"):
-            if conn.status == "LISTEN" and conn.laddr:
-                observations.append({"type": "ip", "value": conn.laddr.ip})
-    except (psutil.AccessDenied, PermissionError):
-        pass
-
-    # Deduplicate
-    seen = set()
-    unique = []
-    for obs in observations:
-        key = (obs["type"], obs["value"])
-        if key not in seen:
-            seen.add(key)
-            unique.append(obs)
-
-    return unique
+    return observations
 
 
-def collect_process_network_hints() -> List[Dict[str, Any]]:
-    """
-    Lightweight process + connection summary for reporting.
-    """
+def collect_process_network_hints(limit: int = 50) -> List[Dict[str, Any]]:
+    """Lightweight process + remote IP summary for operator reports."""
     if psutil is None:
         return []
 
     hints = []
     try:
         for proc in psutil.process_iter(["pid", "name", "username"]):
+            if len(hints) >= limit:
+                break
             try:
                 conns = proc.connections(kind="inet")
-                if conns:
-                    remote_ips = list({c.raddr.ip for c in conns if c.raddr})
-                    if remote_ips:
-                        hints.append({
-                            "pid": proc.info["pid"],
-                            "name": proc.info["name"],
-                            "user": proc.info.get("username"),
-                            "remote_ips": remote_ips[:5],  # limit
-                        })
-            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                remote_ips = list({str(c.raddr.ip) for c in conns if c.raddr})
+                if remote_ips:
+                    hints.append({
+                        "pid": proc.info["pid"],
+                        "name": proc.info["name"],
+                        "user": proc.info.get("username"),
+                        "remote_ips": remote_ips[:8],
+                    })
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 continue
     except Exception:
         pass
 
     return hints
+
+
+def privilege_check() -> Dict[str, Any]:
+    """Simple check of what visibility is available."""
+    result = {"psutil": psutil is not None, "full_connections": False, "note": ""}
+    if psutil is None:
+        result["note"] = "psutil not installed — limited functionality"
+        return result
+    try:
+        list(psutil.net_connections(kind="inet"))
+        result["full_connections"] = True
+        result["note"] = "Full connection visibility available"
+    except (psutil.AccessDenied, PermissionError):
+        result["note"] = "Insufficient privileges for full connection list — run with appropriate rights for best results"
+    except Exception as e:
+        result["note"] = f"Visibility limited: {e}"
+    return result

@@ -1,44 +1,53 @@
 {
+  "version": "0.2.0-placeholder",
+  "last_updated": "2026-09-29",
   "domains": [
     {
       "value": "streaming-free-tt.example",
       "severity": "high",
-      "desc": "Known illegal streaming distribution domain pattern (replace with real indicators)"
+      "desc": "Illegal streaming distribution pattern (REPLACE WITH REAL INDICATORS)",
+      "tags": ["streaming", "malware"]
     },
     {
       "value": "crack-software-download.example",
       "severity": "high",
-      "desc": "Cracked software malware vector pattern (replace with real indicators)"
+      "desc": "Cracked software malware vector (REPLACE WITH REAL INDICATORS)",
+      "tags": ["cracked", "malware"]
     },
     {
       "value": "whatsapp-verify-tt.example",
       "severity": "high",
-      "desc": "Local WhatsApp phishing lure pattern (replace with real indicators)"
+      "desc": "Local WhatsApp phishing lure pattern (REPLACE WITH REAL INDICATORS)",
+      "tags": ["phishing", "whatsapp"]
     },
     {
       "value": "tt-lottery-win.example",
       "severity": "medium",
-      "desc": "Regional lottery phishing pattern (replace with real indicators)"
+      "desc": "Regional lottery phishing pattern (REPLACE WITH REAL INDICATORS)",
+      "tags": ["phishing", "lottery"]
     }
   ],
   "ips": [
     {
       "value": "185.220.101.0/24",
       "severity": "medium",
-      "desc": "Sample Tor exit / proxy range — replace with live residential proxy intel"
+      "desc": "Sample Tor/proxy range — replace with live residential proxy intel",
+      "tags": ["proxy", "tor"]
     },
     {
       "value": "45.95.147.0/24",
       "severity": "medium",
-      "desc": "Sample residential proxy network range"
+      "desc": "Sample residential proxy network range",
+      "tags": ["residential-proxy"]
     }
   ],
   "user_agents": [
     {
       "value": "ResidentialProxyBot",
       "severity": "high",
-      "desc": "Known residential proxy tool signature (example)"
+      "desc": "Known residential proxy tool signature (example)",
+      "tags": ["proxy-tool"]
     }
   ],
-  "notes": "MVP placeholder indicators. Replace this file with a maintained Caribbean-focused threat intel feed for production use."
+  "notes": "Placeholders only. Load real Caribbean-focused indicators before any client deployment."
 }

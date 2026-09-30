@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "caribwatch"
-version = "0.1.0"
+version = "0.2.0"
 description = "Caribbean-Specific Threat Visibility Tool by TrinTech Digital Defense"
 readme = "README.md"
 requires-python = ">=3.9"
