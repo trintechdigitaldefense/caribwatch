@@ -1,0 +1,44 @@
+{
+  "domains": [
+    {
+      "value": "streaming-free-tt.example",
+      "severity": "high",
+      "desc": "Known illegal streaming distribution domain pattern (replace with real indicators)"
+    },
+    {
+      "value": "crack-software-download.example",
+      "severity": "high",
+      "desc": "Cracked software malware vector pattern (replace with real indicators)"
+    },
+    {
+      "value": "whatsapp-verify-tt.example",
+      "severity": "high",
+      "desc": "Local WhatsApp phishing lure pattern (replace with real indicators)"
+    },
+    {
+      "value": "tt-lottery-win.example",
+      "severity": "medium",
+      "desc": "Regional lottery phishing pattern (replace with real indicators)"
+    }
+  ],
+  "ips": [
+    {
+      "value": "185.220.101.0/24",
+      "severity": "medium",
+      "desc": "Sample Tor exit / proxy range — replace with live residential proxy intel"
+    },
+    {
+      "value": "45.95.147.0/24",
+      "severity": "medium",
+      "desc": "Sample residential proxy network range"
+    }
+  ],
+  "user_agents": [
+    {
+      "value": "ResidentialProxyBot",
+      "severity": "high",
+      "desc": "Known residential proxy tool signature (example)"
+    }
+  ],
+  "notes": "MVP placeholder indicators. Replace this file with a maintained Caribbean-focused threat intel feed for production use."
+}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "caribwatch"
+version = "0.1.0"
+description = "Caribbean-Specific Threat Visibility Tool by TrinTech Digital Defense"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "TrinTech Digital Defense", email = "trintechdigitaldefense@gmail.com"}
+]
+dependencies = [
+    "psutil>=5.9.0",
+    "requests>=2.28.0",
+    "rich>=13.0.0",
+]
+
+[project.scripts]
+caribwatch = "caribwatch.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["caribwatch*"]
