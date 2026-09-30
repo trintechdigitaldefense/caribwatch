@@ -1,53 +1,74 @@
 {
-  "version": "0.2.0-placeholder",
+  "version": "0.2.1-public-examples",
   "last_updated": "2026-09-29",
+  "source_notes": "These are publicly documented examples drawn from TT-CSIRT advisories, reputable threat reports, and known residential-proxy infrastructure patterns. They are for demonstration and testing only. Replace with your maintained, current Caribbean-focused feed before any production client deployment. Always verify indicators independently.",
   "domains": [
     {
-      "value": "streaming-free-tt.example",
+      "value": "revisar.sth.tr",
       "severity": "high",
-      "desc": "Illegal streaming distribution pattern (REPLACE WITH REAL INDICATORS)",
-      "tags": ["streaming", "malware"]
+      "desc": "Publicly reported in TT-CSIRT advisory (2026) as fraudulent e-Tax / Board of Inland Revenue phishing domain",
+      "tags": ["phishing", "tt-local", "e-tax", "government-lure"],
+      "reference": "TT-CSIRT advisory 455.20.04.26"
     },
     {
-      "value": "crack-software-download.example",
+      "value": "deadhub.org",
       "severity": "high",
-      "desc": "Cracked software malware vector (REPLACE WITH REAL INDICATORS)",
-      "tags": ["cracked", "malware"]
+      "desc": "Publicly documented C2 / first-stage domain in MovieReaper torrent malware campaign (Securelist 2026)",
+      "tags": ["malware", "streaming-piracy", "c2"],
+      "reference": "Securelist MovieReaper report"
     },
     {
-      "value": "whatsapp-verify-tt.example",
-      "severity": "high",
-      "desc": "Local WhatsApp phishing lure pattern (REPLACE WITH REAL INDICATORS)",
-      "tags": ["phishing", "whatsapp"]
-    },
-    {
-      "value": "tt-lottery-win.example",
+      "value": "gouvn.me",
       "severity": "medium",
-      "desc": "Regional lottery phishing pattern (REPLACE WITH REAL INDICATORS)",
-      "tags": ["phishing", "lottery"]
+      "desc": "Publicly associated with Shadow Campaigns infrastructure used in regional government scanning (Unit 42)",
+      "tags": ["espionage", "government-lure", "proxy"],
+      "reference": "Palo Alto Unit 42 Shadow Campaigns"
+    },
+    {
+      "value": "msonline.help",
+      "severity": "medium",
+      "desc": "Publicly listed infrastructure domain in the same Shadow Campaigns report",
+      "tags": ["phishing", "credential"],
+      "reference": "Palo Alto Unit 42"
     }
   ],
   "ips": [
     {
+      "value": "193.23.118.155",
+      "severity": "high",
+      "desc": "Publicly documented fallback C2 IP for MovieReaper malware",
+      "tags": ["c2", "malware"],
+      "reference": "Securelist MovieReaper"
+    },
+    {
+      "value": "208.64.33.90",
+      "severity": "high",
+      "desc": "Publicly documented second-stage C2 related to MovieReaper campaign",
+      "tags": ["c2", "malware"],
+      "reference": "Securelist MovieReaper"
+    },
+    {
       "value": "185.220.101.0/24",
       "severity": "medium",
-      "desc": "Sample Tor/proxy range — replace with live residential proxy intel",
-      "tags": ["proxy", "tor"]
+      "desc": "Well-known Tor exit / proxy-related range frequently observed in threat telemetry (example range for testing CIDR matching)",
+      "tags": ["proxy", "tor", "anonymization"],
+      "reference": "Public Tor exit lists / threat reports"
     },
     {
       "value": "45.95.147.0/24",
       "severity": "medium",
-      "desc": "Sample residential proxy network range",
-      "tags": ["residential-proxy"]
+      "desc": "Sample range previously associated with residential proxy infrastructure in public research (for testing only)",
+      "tags": ["residential-proxy"],
+      "reference": "Public proxy research samples"
     }
   ],
   "user_agents": [
     {
       "value": "ResidentialProxyBot",
       "severity": "high",
-      "desc": "Known residential proxy tool signature (example)",
+      "desc": "Example signature string for residential proxy tooling (replace with observed strings from your environment)",
       "tags": ["proxy-tool"]
     }
   ],
-  "notes": "Placeholders only. Load real Caribbean-focused indicators before any client deployment."
+  "notes": "IMPORTANT: This file contains a small set of publicly documented examples only. It is not a comprehensive or continuously updated threat feed. For client deployments you must maintain your own curated indicator set (from TT-CSIRT, commercial feeds, open-source CTI, and your own observations). Stale indicators create both false positives and false negatives."
 }
